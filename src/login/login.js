@@ -9,12 +9,14 @@ const Login = () => {
     const [error, setError] = useState(null);
     async function handleSignIn() {
         try {
+            setError(" ")
+            console.log("LoginSucessfull")
 
             await createUserWithEmailAndPassword(auth, email, password);
-            console.log("LoginSucessfull")
-            return (
-                <h1>Login sucessfull</h1>
-            )
+            alert("Login Sucessfull");
+            setEmail("");
+            setPassword("")
+
 
         }
         catch (err) {
@@ -30,10 +32,12 @@ const Login = () => {
 
             <input type="email"
                 placeholder="EMAIL"
+                value={email}
                 onChange={({ target }) => setEmail(target.value)}
             ></input>
             <input type="password"
                 placeholder="PASSWORD"
+                value={password}
                 onChange={({ target }) => setPassword(target.value)} ></input>
             <button onClick={handleSignIn}>SignIn</button>
 
