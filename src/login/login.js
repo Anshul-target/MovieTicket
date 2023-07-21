@@ -18,14 +18,14 @@ const Login = () => {
             alert("Login Sucessfull");
             setEmail("");
             setPassword("")
-            history.push("/movies")
+            history("/movies")
 
 
         }
         catch (err) {
             setError(err.message);
-            // setEmail("")
-            // setPassword("")
+            setEmail("")
+            setPassword("")
         }
     }
     return (
