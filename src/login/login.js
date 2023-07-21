@@ -1,9 +1,11 @@
 
 import '../App.css';
+import { useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { auth } from "../config/firebase"
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 const Login = () => {
+    const history = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null);
@@ -16,6 +18,7 @@ const Login = () => {
             alert("Login Sucessfull");
             setEmail("");
             setPassword("")
+            history.push("/movies")
 
 
         }
