@@ -1,12 +1,12 @@
 import "../styles/login.css"
 import { Link, useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../config/firebase"
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { db } from "../config/firebase";
 import { collection, setDoc, doc } from "firebase/firestore"
 // import { useNavigate } from "react-router-dom";
-import { checkEmail } from "./checkEmail";
+import { checkEmailExist } from "./checkEmail";
 const SignUp = () => {
     const history = useNavigate();
 
@@ -22,14 +22,28 @@ const SignUp = () => {
     const collectionName = collection(db, "Movies");
     const docname = doc(db, "User", "userData")
     const navigate = useNavigate();
+    // const see = checkEmailExist("anshulyadav@gmail.com").then((msg) => msg);
+    // console.log(see)
     const isNotFilled = email == "" || password == "" || fullName == "" || userName == ""
     const [emailExists, setEmailExists] = useState(false);
-    checkEmail("anshulyadav@gmail.com");
+
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            const exist = await checkEmailExist(email)
+            console.log(exist)
+            setEmailExists(exist)
+        }
+        fetchData();
+    }, [email]);
+
+
     async function handleSignUp() {
         try {
             setError("")
 
-            // setEmailExists(checkEmail(email))
+
             if (!emailExists) {
 
                 await setDoc(docname, {
@@ -52,8 +66,10 @@ const SignUp = () => {
         }
         catch (err) {
             setError(err.message);
-            setEmail("")
-            setPassword("")
+            setEmail("");
+            setPassword("");
+            setFullName("");
+            setUserName("");
         }
     }
     return (
