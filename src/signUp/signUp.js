@@ -20,20 +20,30 @@ const SignUp = () => {
     const collectionName = collection(db, "Movies");
     const docname = doc(db, "User", "userData")
     const navigate = useNavigate();
-
+    const isNotFilled = email == "" || password == "" || fullName == "" || userName == ""
+    const [emailExists, setEmailExists] = useState(false);
     async function handleSignUp() {
         try {
             setError("")
-            await setDoc(docname, {
-                fullName,
-                userName,
-                email,
-                password
-            });
-            alert("SuccessFull SignUp");
-            navigate("/");
-            setEmail("")
-            setPassword("")
+            // setEmailExists(checkEmail(email))
+            if (!emailExists) {
+
+                await setDoc(docname, {
+                    fullName,
+                    userName,
+                    email,
+                    password
+                });
+                alert("SuccessFull SignUp");
+                navigate("/");
+                setEmail("")
+                setPassword("")
+
+                createUserWithEmailAndPassword(auth, email, password);
+            }
+            else {
+                setError("Already have an account");
+            }
 
         }
         catch (err) {
@@ -65,7 +75,7 @@ const SignUp = () => {
                 placeholder="PASSWORD"
                 value={password}
                 onChange={({ target }) => setPassword(target.value)} ></input>
-            <button onClick={handleSignUp}>SignUp</button>
+            <button  {!isNotFilled && { onClick={ handleSignUp } }} >SignUp</button>
             <h4 >Have an account? {" "} <Link to="/signUp" style={{ textDecoration: "none" }}> SignIn</Link> </h4>
         </div>
     )
