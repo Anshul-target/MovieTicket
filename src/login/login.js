@@ -1,9 +1,10 @@
 
-import '../App.css';
-import { useNavigate } from "react-router-dom"
+// import '../App.css';
+import "../styles/login.css"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { auth } from "../config/firebase"
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 const Login = () => {
     const history = useNavigate();
     const [email, setEmail] = useState("")
@@ -14,7 +15,7 @@ const Login = () => {
             setError(" ")
             console.log("LoginSucessfull")
 
-            await createUserWithEmailAndPassword(auth, email, password);
+            await signInWithEmailAndPassword(auth, email, password);
             alert("Login Sucessfull");
             setEmail("");
             setPassword("")
@@ -43,7 +44,7 @@ const Login = () => {
                 value={password}
                 onChange={({ target }) => setPassword(target.value)} ></input>
             <button onClick={handleSignIn}>SignIn</button>
-
+            <h4 >Dont you have an account? <Link to="/signUp" style={{ textDecoration: "none" }}> SignUp</Link> </h4>
         </div>
     )
 
