@@ -12,6 +12,7 @@ const SignUp = () => {
 
 
 
+
     const [fullName, setFullName] = useState("")
     const [userName, setUserName] = useState("")
     // const [fullName, setFullName] = useState("")
