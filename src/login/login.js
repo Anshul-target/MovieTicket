@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { auth } from "../config/firebase"
 import { signInWithEmailAndPassword } from 'firebase/auth';
-export const isAuth = false;
+export let isAuth = false;
 const Login = () => {
     const history = useNavigate();
     const [email, setEmail] = useState("")
