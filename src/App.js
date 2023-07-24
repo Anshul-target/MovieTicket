@@ -14,11 +14,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />}>
         </Route>
-        {/* <Route element={<ProtectedRoutes />}>
-        </Route> */}
 
-        <Route path="/movies" element={<Movies />}></Route>
-        <Route path="/emailVerification" element={<ForgotPassword />}></Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/movies" element={<Movies />}></Route>
+          <Route path="/emailVerification" element={<ForgotPassword />}></Route>
+        </Route>
         <Route path="/signUp" element={<SignUp />}></Route>
 
       </Routes>
