@@ -19,8 +19,8 @@ const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null);
-    const collectionName = collection(db, "Movies");
-    const docname = doc(db, "User", "userData")
+    const collectionName = collection(db, "User");
+    const docname = doc(collectionName)
     const navigate = useNavigate();
     // const see = checkEmailExist("anshulyadav@gmail.com").then((msg) => msg);
     // console.log(see)
@@ -61,6 +61,13 @@ const SignUp = () => {
             }
             else {
                 setError("Already have an account");
+                setEmail("");
+                setPassword("");
+                setFullName("");
+                setUserName("")
+
+
+
             }
 
         }
@@ -98,7 +105,7 @@ const SignUp = () => {
                 onChange={({ target }) => setPassword(target.value)} ></input>
             <button disabled={isNotFilled} onClick={handleSignUp}>SignUp</button>
 
-            <h4 >Have an account? {" "} <Link to="/signUp" style={{ textDecoration: "none" }}> SignIn</Link> </h4>
+            <h4 >Have an account? {" "} <Link to="/" style={{ textDecoration: "none" }}> SignIn</Link> </h4>
         </div>
     )
 

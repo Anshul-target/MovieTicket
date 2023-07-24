@@ -42,7 +42,9 @@ const Login = () => {
             <input type="password"
                 placeholder="PASSWORD"
                 value={password}
+
                 onChange={({ target }) => setPassword(target.value)} ></input>
+            <h5><Link to="/emailVerification" style={{ textDecoration: "none" }}>Forgot Password?</Link></h5>
             <button onClick={handleSignIn}>SignIn</button>
             <h4 >Dont you have an account? <Link to="/signUp" style={{ textDecoration: "none" }}> SignUp</Link> </h4>
         </div>
