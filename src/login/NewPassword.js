@@ -11,7 +11,7 @@ export const ForgotPassword = () => {
                 id="myInput"
 
             ></input>
-            <button>Submit</button>
+            <button> Submit</button>
 
         </div>
     )
