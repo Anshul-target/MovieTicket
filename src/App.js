@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Movies } from "./movies/movies";
 import SignUp from "./signUp/signUp";
 import { ForgotPassword } from "./login/NewPassword";
+import { ProtectedRoutes } from "./ProtectedRoutes/ProtectedRoutes";
 function App() {
 
   return (
@@ -13,9 +14,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />}>
         </Route>
-        <Route path="/movies" element={<Movies />}></Route>
+        <Route element={<ProtectedRoutes />}>
+
+          <Route path="/movies" element={<Movies />}></Route>
+          <Route path="/emailVerification" element={<ForgotPassword />}></Route>
+        </Route>
         <Route path="/signUp" element={<SignUp />}></Route>
-        <Route path="/emailVerification" element={<ForgotPassword />}></Route>
 
       </Routes>
     </div>

@@ -5,18 +5,21 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { auth } from "../config/firebase"
 import { signInWithEmailAndPassword } from 'firebase/auth';
+export const isAuth = false;
 const Login = () => {
     const history = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null);
+
     async function handleSignIn() {
         try {
             setError(" ")
             console.log("LoginSucessfull")
-
+            isAuth = true;
             await signInWithEmailAndPassword(auth, email, password);
             alert("Login Sucessfull");
+
             setEmail("");
             setPassword("")
             history("/movies")
@@ -27,6 +30,7 @@ const Login = () => {
             setError(err.message);
             setEmail("")
             setPassword("")
+            isAuth = false;
         }
     }
     return (
